@@ -116,7 +116,27 @@ class Video(Anuncio):
     
     def __init__(self, sub_tipo: str, url_archivo: str, url_click: str, duracion: int):
         super().__init__(1, 1, sub_tipo, url_archivo, url_click) 
-        self.__duracion = duracion
+        self.__duracion = duracion if duracion > 0 else 5
+        
+    # getter alto    
+    @property
+    def alto(self):
+        return self.__alto
+    
+    # getter ancho
+    @property
+    def ancho(self):
+        return self.__ancho
+    
+    # setter alto
+    @alto.setter
+    def metodo(self, alto):
+       pass
+        
+    # setter ancho
+    @ancho.setter
+    def metodo(self, ancho):
+        pass
         
     # getter duracion
     @property
@@ -126,7 +146,7 @@ class Video(Anuncio):
     # setter duracion
     @duracion.setter
     def duracion(self, duracion: int):
-        self.__duracion = duracion
+        self.__duracion = duracion if duracion > 0 else 5
 
     def modificar_duracion(self, nueva_duracion):
         if nueva_duracion > 0:
@@ -144,6 +164,10 @@ class Video(Anuncio):
 # clase Display
 
 class Display(Anuncio):
+    FORMATO = "Display"
+    # Tupla video
+    SUB_TIPOS = ("tradicional", "native")
+    
     def comprimir_anuncio(self):
         print('COMPRESIÓN DE ANUNCIOS DISPLAY NO IMPLEMENTADA AÚN')
 
@@ -154,6 +178,10 @@ class Display(Anuncio):
 # clase Social
 
 class Social(Anuncio):
+    FORMATO = "Social"
+    # Tupla video
+    SUB_TIPOS = ("facebook", "linkedin")
+    
     def comprimir_anuncio(self):
         print('COMPRESIÓN DE ANUNCIOS DE REDES SOCIALES NO IMPLEMENTADA AÚN')
 
