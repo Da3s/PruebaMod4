@@ -1,17 +1,25 @@
 from anuncio import Video, Display, Social
+from datetime import date
 
 class Campaña:
-    def __init__(self, nombre, anuncios):
-        self.nombre = nombre
-        self.anuncios = anuncios
+    def __init__(self, nombre:str, fecha_inicio: date, fecha_termino: date, anuncios: list):
+        self.__nombre = nombre
+        self.__fecha_inicio = fecha_inicio
+        self.__fecha_termino = fecha_termino
+        self.__anuncios = [self.__instancia_de_anuncios(dicc) for dicc in anuncios]
+        # self.__anuncios[Video, Display, Social]
+        #[{},{},{}]
 
-    def __str__(self):
-        anuncios_por_tipo = self.contar_anuncios()
-        return f"Nombre de la campaña: {self.nombre}\nAnuncios: {anuncios_por_tipo}"
+    def __instancia_de_anuncios(self, anuncio: dicc):
+        #return Video()
+        #return Social()
+        #return Display()
+        pass 
+        
 
     def contar_anuncios(self):
         contador = {"Video": 0, "Display": 0, "Social": 0}
-        for anuncio in self.anuncios:
+        for anuncio in self.__anuncios:
             if isinstance(anuncio, Video):
                 contador["Video"] += 1
             elif isinstance(anuncio, Display):

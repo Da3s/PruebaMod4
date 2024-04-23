@@ -1,7 +1,7 @@
-class SubTipoInvalidoException(Exception):
-    def __init__(self, mensaje="El subtipo no es válido para este tipo de anuncio."):
+class SubTipoInvalidoError(Exception):
+    def __init__(self, mensaje, subtipo):
         self.mensaje = mensaje
-        super().__init__(self.mensaje)
+        self.subtipo = subtipo
 
 class LargoExcedidoException(Exception):
     def __init__(self, mensaje="El nombre de la campaña supera los 250 caracteres."):

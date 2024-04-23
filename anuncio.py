@@ -1,4 +1,4 @@
-from error import SubTipoInvalidoException, LargoExcedidoException
+from error import SubTipoInvalidoError
 from abc import ABC, abstractmethod
 
 class Anuncio:
@@ -54,14 +54,16 @@ class Anuncio:
         
     # setter sub_tipo
     @sub_tipo.setter
-    def sub_tipo(self, nuevo_sub_tipo: str):
+    def sub_tipo(self, sub_tipo: str):
         try:
-            if nuevo_sub_tipo in self.SUB_TIPOS:
-                self.__sub_tipo = nuevo_sub_tipo
+            if (isinstance(self, Video) and sub_tipo not in Video.SUB_TIPOS or
+            isinstance(self, Display) and sub_tipo not in Display.SUB_TIPOS or
+            isinstance(self, Social) and sub_tipo not in Social.SUB_TIPOS):
+                raise SubTipoInvalidoError(f"El subtipo '{sub_tipo}' no es válido para este tipo de anuncio.", sub_tipo)
             else:
-                (f"El subtipo '{nuevo_sub_tipo}' no es válido para este tipo de anuncio.")
-        except SubTipoInvalidoException as e:
-            print(e)
+                self.__sub_tipo = sub_tipo
+        except SubTipoInvalidoError as stie:
+            print("Error: {stie}", stie.subtipo)
 
     # Setter establecer_url_archivo
     @url_archivo.setter
