@@ -85,10 +85,18 @@ class Anuncio:
 
     @staticmethod
     def mostrar_formatos():
-        print("Formato:")
+        print("Formato Video:")
         print("****************")
-        for subtipo in Anuncio.SUB_TIPOS:
-            print(f"- {subtipo}")
+        for video in Video.SUB_TIPOS:
+            print(f"- {video}")
+        print("Formato Display:")
+        print("****************")
+        for display in Display.SUB_TIPOS:
+            print(f"- {display}")
+        print("Formato Social:")
+        print("****************")
+        for social in Social.SUB_TIPOS:
+            print(f"- {social}")
 
     # establecer_url_archivo
     def establecer_url_archivo(self, nueva_url_archivo: str):
@@ -102,9 +110,23 @@ class Anuncio:
 # clase Video
 
 class Video(Anuncio):
-    def __init__(self, duracion):
-        super().__init__(1, 1)
-        self.duracion = duracion
+    FORMATO = "Video"
+    # Tupla video
+    SUB_TIPOS = ("instream", "outstream")
+    
+    def __init__(self, sub_tipo: str, url_archivo: str, url_click: str, duracion: int):
+        super().__init__(1, 1, sub_tipo, url_archivo, url_click) 
+        self.__duracion = duracion
+        
+    # getter duracion
+    @property
+    def duracion(self):
+        return self.__duracion    
+        
+    # setter duracion
+    @duracion.setter
+    def duracion(self, duracion: int):
+        self.__duracion = duracion
 
     def modificar_duracion(self, nueva_duracion):
         if nueva_duracion > 0:
@@ -112,11 +134,9 @@ class Video(Anuncio):
         else:
             self.duracion = 5
             
-    @abstractmethod
     def comprimir_anuncio(self):
         print('COMPRESIÓN DE VIDEO NO IMPLEMENTADA AÚN')
 
-    @abstractmethod
     def redimensionar_anuncio(self):
         print('RECORTE DE VIDEO NO IMPLEMENTADO AÚN')
 
